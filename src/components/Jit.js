@@ -26,10 +26,18 @@ const Jit = (props) => {
         setClose(true);
     }
 
+    const handleCopyLink = () => {
+        navigator.clipboard.writeText(link).then(() => alert("Copied link: " + link))
+    }
+
     return call ? (
         <div aria-hidden={close}>
             <div>
-                <a href={link}>Join to video conference</a>
+                <div className="input-group mb-3 d-inline-flex align-content-center align-items-center text-center" style={{width: '350px'}}>
+                    <input id="linkText" type="text" className="form-control" placeholder="Link for join to meeting"
+                           aria-label="Link for join to meeting" aria-describedby="button-addon2" defaultValue={link} readOnly/>
+                        <button className="btn btn-outline-secondary" type="button" id="button-addon2" onClick={handleCopyLink}>copy</button>
+                </div>
                 { password ? <p>Password: <span>{password}</span></p> : <p>Not protected</p>}
             </div>
             <Jutsu
